@@ -1,6 +1,6 @@
 export default function BlocksPage() {
   return (
-    <div className="mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 py-12">
+    <>
       <h1 className="text-4xl font-bold mb-6">Blocks</h1>
       <p className="text-lg text-muted-foreground mb-8">
         Discover our pre-built blocks - larger, composable sections that you can
@@ -83,6 +83,6 @@ export default function BlocksPage() {
           </ul>
         </div>
       </div>
-    </div>
+    </>
   );
 }

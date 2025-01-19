@@ -1,32 +1,37 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
   CardContent,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { AlertCircle, Home } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="flex items-center justify-center flex-grow py-12 px-4">
-      <Card className="w-full max-w-[420px]">
+    <div className="flex-grow flex items-center justify-center selection:px-4 py-8">
+      <Card className="w-full max-w-md shadow-lg">
         <CardHeader>
-          <CardTitle className="text-4xl font-extrabold">404</CardTitle>
-          <CardDescription>Oops! Page not found</CardDescription>
+          <CardTitle className="text-center flex items-center justify-center space-x-2">
+            <AlertCircle className="h-6 w-6 text-yellow-500" />
+            <span>404 - Not Found</span>
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-muted-foreground">
-            The page you are looking for might have been removed, had its name
-            changed, or is temporarily unavailable.
-          </p>
+          <div className="text-center space-y-4">
+            <p className="text-7xl font-bold text-gray-300">404</p>
+            <p className="text-xl text-gray-600">
+              Oops! The page you&apos;re looking for doesn&apos;t exist.
+            </p>
+          </div>
         </CardContent>
-        <CardFooter>
-          <Button asChild className="w-full">
-            <Link href="/" replace>
-              Go back home
+        <CardFooter className="flex justify-center">
+          <Button asChild>
+            <Link href="/" replace className="flex items-center space-x-2">
+              <Home className="h-4 w-4" />
+              <span>Back to Home</span>
             </Link>
           </Button>
         </CardFooter>
