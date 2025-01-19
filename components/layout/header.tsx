@@ -27,14 +27,14 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto w-full max-w-screen-xl px-4 flex h-14 items-center">
+      <div className="mx-auto w-full px-4 flex h-14 items-center justify-between">
         <div className="mr-4 flex items-center">
           <Link href="/" className="flex items-center space-x-2">
             <Logo className="h-6 w-6" />
             <span className="font-bold hidden md:inline-block">shadcn/ui</span>
           </Link>
         </div>
-        <div className="flex flex-1">
+        <div className="flex-1 hidden sm:flex">
           <nav className="flex items-center space-x-4 text-sm font-medium">
             {navItems.map((item) => (
               <Link
@@ -51,6 +51,7 @@ export function Header() {
             ))}
           </nav>
         </div>
+        <div className="flex-grow sm:hidden" />
         <div className="flex items-center justify-end">
           {mounted && (
             <Button
