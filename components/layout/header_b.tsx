@@ -4,8 +4,7 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
-import { ProfileButton } from "@/components/ui/profile-button";
-import { Moon, Sun } from "lucide-react";
+import { Github, Moon, Sun } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
@@ -52,6 +51,17 @@ export function Header() {
           </nav>
         </div>
         <div className="flex items-center justify-end">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8"
+            onClick={() =>
+              window.open("https://github.com/shadcn-ui/ui", "_blank")
+            }
+          >
+            <Github className="h-4 w-4" />
+            <span className="sr-only">GitHub</span>
+          </Button>
           {mounted && (
             <Button
               variant="ghost"
@@ -67,7 +77,6 @@ export function Header() {
               <span className="sr-only">Toggle theme</span>
             </Button>
           )}
-          <ProfileButton />
         </div>
       </div>
     </header>

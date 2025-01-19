@@ -4,8 +4,8 @@ import "./globals.css";
 // Imports
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
-import Header from "@/components/layout/header";
-import Footer from "@/components/layout/footer";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,9 +28,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-full flex flex-col`}
       >
         <ThemeProvider
           attribute="class"
@@ -39,9 +39,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main className="flex-grow mt-16 px-4 sm:px-6 lg:px-8 py-8 max-w-7xl mx-auto w-full">
-            {children}
-          </main>
+          <main className="flex-1">{children}</main>
           <Footer />
           <Toaster />
         </ThemeProvider>
