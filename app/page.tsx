@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
+    <>
       <section className="flex flex-col items-center justify-center space-y-4 py-24 text-center">
         <h1 className="text-4xl font-bold">Build your component library</h1>
         <p className="max-w-[600px] text-muted-foreground">
@@ -27,6 +27,6 @@ export default function Home() {
           </div>
         ))}
       </section>
-    </div>
+    </>
   );
 }
