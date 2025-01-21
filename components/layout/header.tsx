@@ -40,43 +40,12 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto w-full px-4 flex h-14 items-center">
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-8 w-8 mr-2 sm:hidden"
-            >
-              <Menu className="h-4 w-4" />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent
-            side="left"
-            aria-label="Navigation menu"
-            aria-describedby="navigation-description"
-            title={""}
-            description={""}
-          >
+        <Sheet>
+          <SheetTrigger>Open</SheetTrigger>
+          <SheetContent>
             <SheetHeader>
-              <SheetTitle>Menu</SheetTitle>
+              <SheetTitle>Are you absolutely sure?</SheetTitle>
             </SheetHeader>
-            <nav className="flex flex-col space-y-4 mt-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={closeSheet}
-                  className={`text transition-colors hover:text-foreground/80 ${
-                    pathname === item.href
-                      ? "text-foreground font-semibold"
-                      : "text-foreground/60"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
           </SheetContent>
         </Sheet>
         <div className="mr-4 flex items-center flex-1 sm:flex-initial">
