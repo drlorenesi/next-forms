@@ -6,32 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 import { ProfileButton } from "@/components/ui/profile-button";
 import { Moon, Sun } from "lucide-react";
-import { useState, useEffect } from "react";
 import { MobileNavigation } from "./mobile-navigation";
 import { DesktopNavigation } from "./desktop-navigation";
-
-const navLinks = [
-  { href: "/docs", label: "Docs" },
-  { href: "/components", label: "Components" },
-  { href: "/blocks", label: "Blocks" },
-  {
-    label: "Services",
-    submenu: [
-      { href: "/services/web-development", label: "Web Development" },
-      { href: "/services/mobile-apps", label: "Mobile Apps" },
-      { href: "/services/consulting", label: "Consulting" },
-    ],
-  },
-];
+import { navLinks } from "./navigation";
 
 export function Header() {
   const { setTheme, theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  // Prevent hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -47,21 +27,20 @@ export function Header() {
           <DesktopNavigation navLinks={navLinks} />
         </div>
         <div className="flex items-center justify-end space-x-2">
-          {mounted && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-8 w-8"
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            >
-              {theme === "light" ? (
-                <Moon className="h-4 w-4" />
-              ) : (
-                <Sun className="h-4 w-4" />
-              )}
-              <span className="sr-only">Toggle theme</span>
-            </Button>
-          )}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8"
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          >
+            {theme === "light" ? (
+              <Moon className="h-4 w-4" />
+            ) : (
+              <Sun className="h-4 w-4" />
+            )}
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+
           <ProfileButton />
         </div>
       </div>

@@ -13,9 +13,10 @@ export interface NavigationLinks {
   navLinks: NavigationLink[];
 }
 
-export const navigationLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
+export const navLinks = [
+  { href: "/docs", label: "Docs" },
+  { href: "/components", label: "Components" },
+  { href: "/blocks", label: "Blocks" },
   {
     label: "Services",
     submenu: [
@@ -24,5 +25,4 @@ export const navigationLinks = [
       { href: "/services/consulting", label: "Consulting" },
     ],
   },
-  { href: "/contact", label: "Contact" },
 ];
