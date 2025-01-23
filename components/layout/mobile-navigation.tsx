@@ -21,7 +21,7 @@ import {
 // Types
 import type { NavigationLinks } from "./navigation";
 
-export default function MobileNavigation({ navLinks }: NavigationLinks) {
+export function MobileNavigation({ navLinks }: NavigationLinks) {
   const [open, setOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<Record<string, boolean>>({});
   const pathname = usePathname();
