@@ -16,14 +16,16 @@ export default function NotFound() {
         <CardHeader>
           <CardTitle className="text-center flex items-center justify-center space-x-2">
             <AlertCircle className="h-6 w-6 text-yellow-500" />
-            <span>404 - Not Found</span>
+            <span>Página no encontrada</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center space-y-4">
-            <p className="text-7xl font-bold text-gray-300">404</p>
-            <p className="text-xl text-gray-600">
-              Oops! The page you&apos;re looking for doesn&apos;t exist.
+            <code className="text-7xl font-mono font-semibold relative rounded px-[0.3rem] py-[0.2rem] ">
+              404
+            </code>
+            <p className="text-muted-foreground mb-8 text-center max-w-md">
+              Lo sentimos, no pudimos encontrar la página que estás buscando.
             </p>
           </div>
         </CardContent>
@@ -31,7 +33,7 @@ export default function NotFound() {
           <Button asChild>
             <Link href="/" replace className="flex items-center space-x-2">
               <Home className="h-4 w-4" />
-              <span>Back to Home</span>
+              <span>Volver a Inicio</span>
             </Link>
           </Button>
         </CardFooter>
