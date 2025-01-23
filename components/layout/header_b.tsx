@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -55,11 +56,12 @@ export function Header() {
             side="left"
             aria-label="Navigation menu"
             aria-describedby="navigation-description"
-            title={""}
-            description={""}
           >
             <SheetHeader>
               <SheetTitle>Menu</SheetTitle>
+              <SheetDescription>
+                Quick links to navigate through our site.
+              </SheetDescription>
             </SheetHeader>
             <nav className="flex flex-col space-y-4 mt-4">
               {navItems.map((item) => (

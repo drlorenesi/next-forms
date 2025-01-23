@@ -5,27 +5,28 @@ import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 import { ProfileButton } from "@/components/ui/profile-button";
-import { Moon, Sun, Menu } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import MobileNavigation from "./mobile-navigation";
 
-const navItems = [
+const navLinks = [
   { href: "/docs", label: "Docs" },
   { href: "/components", label: "Components" },
   { href: "/blocks", label: "Blocks" },
+  {
+    label: "Services",
+    submenu: [
+      { href: "/services/web-development", label: "Web Development" },
+      { href: "/services/mobile-apps", label: "Mobile Apps" },
+      { href: "/services/consulting", label: "Consulting" },
+    ],
+  },
 ];
 
 export function Header() {
   const { setTheme, theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   // Prevent hydration mismatch
@@ -33,21 +34,10 @@ export function Header() {
     setMounted(true);
   }, []);
 
-  const closeSheet = () => {
-    setIsOpen(false);
-  };
-
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto w-full px-4 flex h-14 items-center">
-        <Sheet>
-          <SheetTrigger>Open</SheetTrigger>
-          <SheetContent>
-            <SheetHeader>
-              <SheetTitle>Are you absolutely sure?</SheetTitle>
-            </SheetHeader>
-          </SheetContent>
-        </Sheet>
+        <MobileNavigation navLinks={navLinks} />
         <div className="mr-4 flex items-center flex-1 sm:flex-initial">
           <Link href="/" className="flex items-center space-x-2">
             <Logo className="h-6 w-6 hidden sm:block" />
@@ -56,10 +46,10 @@ export function Header() {
         </div>
         <div className="flex-1 hidden sm:flex">
           <nav className="flex items-center space-x-4 text-sm font-medium">
-            {navItems.map((item) => (
+            {navLinks.map((item) => (
               <Link
-                key={item.href}
-                href={item.href}
+                key={item.label}
+                href={item.href ?? "#"}
                 className={`transition-colors hover:text-foreground/80 ${
                   pathname === item.href
                     ? "text-foreground font-semibold"
