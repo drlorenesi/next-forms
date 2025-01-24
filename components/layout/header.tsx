@@ -10,7 +10,16 @@ import { MobileNavigation } from "./mobile-navigation";
 import { DesktopNavigation } from "./desktop-navigation";
 import { navLinks } from "../../app/navigation";
 
-export function Header() {
+interface HeaderProps {
+  user: {
+    name: string;
+    email: string;
+    avatar: string | null;
+    initials: string;
+  };
+}
+
+export function Header({ user }: HeaderProps) {
   const { setTheme, theme } = useTheme();
 
   return (
@@ -40,7 +49,7 @@ export function Header() {
             )}
             <span className="sr-only">Toggle theme</span>
           </Button>
-          <ProfileButton />
+          <ProfileButton user={user} />
         </div>
       </div>
     </header>
