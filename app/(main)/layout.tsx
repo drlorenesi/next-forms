@@ -33,7 +33,7 @@ export default async function Layout({
   return (
     <>
       <Header />
-      <main className="flex-grow mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 py-12">
+      <main className="flex-grow mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 py-4">
         {children}
       </main>
       <Footer />

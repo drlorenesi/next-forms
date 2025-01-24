@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 // Types
-import type { NavigationLinks } from "./navigation";
+import type { NavigationLinks } from "../../app/navigation";
 
 export function DesktopNavigation({ navLinks }: NavigationLinks) {
   const pathname = usePathname();

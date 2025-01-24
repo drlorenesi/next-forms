@@ -4,11 +4,11 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
-import { ProfileButton } from "@/components/ui/profile-button";
+import { ProfileButton } from "@/components/layout/profile-button";
 import { Moon, Sun } from "lucide-react";
 import { MobileNavigation } from "./mobile-navigation";
 import { DesktopNavigation } from "./desktop-navigation";
-import { navLinks } from "./navigation";
+import { navLinks } from "../../app/navigation";
 
 export function Header() {
   const { setTheme, theme } = useTheme();
@@ -26,7 +26,7 @@ export function Header() {
         <div className="flex-1 hidden sm:flex">
           <DesktopNavigation navLinks={navLinks} />
         </div>
-        <div className="flex items-center justify-end space-x-2">
+        <div className="flex items-center justify-end">
           <Button
             variant="ghost"
             size="icon"
@@ -40,7 +40,6 @@ export function Header() {
             )}
             <span className="sr-only">Toggle theme</span>
           </Button>
-
           <ProfileButton />
         </div>
       </div>

@@ -19,7 +19,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 // Types
-import type { NavigationLinks } from "./navigation";
+import type { NavigationLinks } from "../../app/navigation";
 
 export function MobileNavigation({ navLinks }: NavigationLinks) {
   const [open, setOpen] = useState(false);
