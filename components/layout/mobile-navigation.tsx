@@ -4,8 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronRight } from "lucide-react";
-import { Logo } from "@/components/ui/logo";
+import { AlignJustify, ChevronDown, ChevronRight } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -30,13 +29,10 @@ export function MobileNavigation({ navLinks }: NavigationLinks) {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        {/* <Button variant="outline" size="icon" className="h-8 w-8 sm:hidden">
-          <Menu />
+        <Button variant="outline" size="icon" className="h-8 w-8 sm:hidden">
+          <AlignJustify />
           <span className="sr-only">Open menu</span>
-        </Button> */}
-        <button className="p-0 border-none bg-transparent cursor-pointer sm:hidden">
-          <Logo className="h-6 w-6" rotation={90} />
-        </button>
+        </Button>
       </SheetTrigger>
       <SheetContent
         side="left"

@@ -30,6 +30,7 @@ export const navLinks = [
       { href: "/plantillas/components", label: "Components" },
       { href: "/plantillas/docs", label: "Documentation" },
       { href: "/plantillas/general", label: "General" },
+      { href: "/plantillas/tablas", label: "Tablas de Datos" },
     ],
   },
 ];

@@ -29,7 +29,7 @@ export function Header({ user }: HeaderProps) {
         <div className="mr-4 flex items-center flex-1 sm:flex-initial">
           <Link href="/" className="flex items-center space-x-2">
             <Logo className="h-6 w-6 hidden sm:block" />
-            <span className="font-bold hidden md:inline-block">shadcn/ui</span>
+            <span className="font-bold hidden md:inline-block">Company</span>
           </Link>
         </div>
         <div className="flex-1 hidden sm:flex">

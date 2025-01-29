@@ -21,6 +21,8 @@ Adding components using shadcn:
 npx shadcn@latest add popover calendar
 ```
 
+I have attached a react logo .svg component. Using shadcn/ui and Tailwind classes, how can I add an "on hover" effect to it and make it behave like a button? Please display it on a`page.tsx`.
+
 ## Completed
 
 - [x] `manifest.json` not linking up propperly.

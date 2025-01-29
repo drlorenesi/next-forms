@@ -1,8 +1,4 @@
-interface LogoProps extends React.SVGProps<SVGSVGElement> {
-  rotation?: number;
-}
-
-export function Logo({ rotation = 0, ...props }: LogoProps) {
+export function Logo(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -10,7 +6,6 @@ export function Logo({ rotation = 0, ...props }: LogoProps) {
       height="800px"
       viewBox="0 0 24 24"
       fill="currentColor"
-      style={{ transform: `rotate(${rotation}deg)` }}
       {...props}
     >
       <rect x="6" y="11" width="2.5" height="7" rx="1.2" />
