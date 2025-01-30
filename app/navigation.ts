@@ -33,4 +33,8 @@ export const navLinks = [
       { href: "/plantillas/tablas", label: "Tablas de Datos" },
     ],
   },
+  {
+    label: "Formualrios",
+    submenu: [{ href: "/formularios/ingreso", label: "Ingreso" }],
+  },
 ];

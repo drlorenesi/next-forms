@@ -84,7 +84,10 @@ export default async function Canal() {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-3xl font-bold tracking-tight">Tablas de Datos</h2>
+      {/* <h2 className="text-3xl font-bold tracking-tight">Tablas de Datos</h2> */}
+      <h2 className="text-3xl font-bold tracking-tight border-b pb-2 first:mt-0">
+        Tablas de Datos
+      </h2>
       <div className="space-y-2">
         <div className="overflow-x-auto">
           <DataTable columns={columns} data={data} />

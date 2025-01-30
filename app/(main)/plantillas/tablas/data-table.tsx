@@ -82,8 +82,8 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="w-full">
-      <div className="flex justify-between items-center py-4">
-        <div className="flex items-center gap-2">
+      <div className="flex justify-between items-center py-2 px-1">
+        <div className="flex items-center gap-1">
           <div className="flex rounded-lg bg-muted p-1">
             <Select
               value={
@@ -96,7 +96,7 @@ export function DataTable<TData, TValue>({
                 table.setPageSize(size);
               }}
             >
-              <SelectTrigger className="h-8 w-[130px] border-0 bg-transparent focus:ring-0 focus:ring-offset-0">
+              <SelectTrigger className="h-7 w-[110px] border-0 bg-transparent focus:ring-0 focus:ring-offset-0">
                 <SelectValue placeholder="Seleccionar filas" />
               </SelectTrigger>
               <SelectContent side="top">
@@ -111,19 +111,19 @@ export function DataTable<TData, TValue>({
             </Select>
             <Button
               variant="ghost"
-              className="h-8 px-3 hover:bg-accent hover:text-accent-foreground"
+              className="h-7 px-2 hover:bg-accent hover:text-accent-foreground"
               onClick={copyToClipboard}
             >
-              <Copy className="h-4 w-4" />
-              <span className="ml-2">Copiar</span>
+              <Copy className="h-3 w-3 mr-1" />
+              Copiar
             </Button>
             <Button
               variant="ghost"
-              className="h-8 px-3 hover:bg-accent hover:text-accent-foreground"
+              className="h-7 px-2 hover:bg-accent hover:text-accent-foreground"
               onClick={downloadExcel}
             >
-              <FileSpreadsheet className="h-4 w-4" />
-              <span className="ml-2">Excel</span>
+              <FileSpreadsheet className="h-3 w-3 mr-1" />
+              Excel
             </Button>
           </div>
         </div>
@@ -138,9 +138,9 @@ export function DataTable<TData, TValue>({
             <Button
               variant="ghost"
               onClick={() => setGlobalFilter("")}
-              className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+              className="absolute right-0 top-0 h-full px-2 py-1 hover:bg-transparent"
             >
-              <X className="h-4 w-4" />
+              <X className="h-3 w-3" />
               <span className="sr-only">Limpiar búsqueda</span>
             </Button>
           )}
@@ -157,7 +157,7 @@ export function DataTable<TData, TValue>({
                 {headerGroup.headers.map((header) => (
                   <TableHead
                     key={header.id}
-                    className="px-2 py-3 text-left text-sm font-semibold text-foreground uppercase tracking-wider border-r last:border-r-0"
+                    className="py-1 text-left text-sm font-semibold text-foreground uppercase tracking-wider border-r last:border-r-0"
                   >
                     {header.isPlaceholder
                       ? null
@@ -183,7 +183,7 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className="px-2 py-3 whitespace-nowrap border-r last:border-r-0 border-b"
+                      className="px-2 py-1.5 whitespace-nowrap border-r last:border-r-0 border-b"
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -197,7 +197,7 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-16 text-center"
                 >
                   No hay resultados.
                 </TableCell>
@@ -205,13 +205,13 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
           <TableFooter>
-            <TableRow className="bg-primary/5 border-t-2 border-primary/20">
+            <TableRow className="bg-primary/5 border-t border-primary/20">
               {table.getFooterGroups().map((footerGroup) => (
                 <React.Fragment key={footerGroup.id}>
                   {footerGroup.headers.map((header) => (
                     <TableCell
                       key={header.id}
-                      className="px-2 py-3 whitespace-nowrap text-sm font-semibold text-foreground uppercase tracking-wider border-r last:border-r-0"
+                      className="px-2 py-2 font-semibold text-foreground uppercase tracking-wider border-r last:border-r-0"
                     >
                       {header.isPlaceholder
                         ? null
@@ -227,7 +227,7 @@ export function DataTable<TData, TValue>({
           </TableFooter>
         </Table>
       </div>
-      <div className="flex items-center justify-between space-x-2 py-4">
+      <div className="flex items-center justify-between space-x-2 py-2">
         <div className="flex-1 text-sm text-muted-foreground">
           Mostrando{" "}
           {table.getState().pagination.pageIndex *
@@ -241,12 +241,13 @@ export function DataTable<TData, TValue>({
           )}{" "}
           de {table.getFilteredRowModel().rows.length} resultados
         </div>
-        <div className="space-x-2">
+        <div className="space-x-1">
           <Button
             variant="outline"
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
+            className="h-7 px-2 text-sm"
           >
             Anterior
           </Button>
@@ -255,6 +256,7 @@ export function DataTable<TData, TValue>({
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
+            className="h-7 px-2 text-sm"
           >
             Siguiente
           </Button>

@@ -13,7 +13,7 @@ export function SortableColumnHeader<TData, TValue>({
 }: SortableColumnHeaderProps<TData, TValue>) {
   return (
     <Button
-      variant="ghost"
+      variant="ghostNoHover"
       onClick={() => {
         const currentSortingState = column.getIsSorted();
         if (currentSortingState === false) {
