@@ -33,6 +33,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { downloadExcel } from "@/utils/exceUtils";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -76,14 +77,12 @@ export function DataTable<TData, TValue>({
     console.log("Botón Copiar clickeado");
   };
 
-  const downloadExcel = () => {
-    console.log("Botón Excel clickeado");
-  };
+  const tableRef = React.useRef<HTMLTableElement | null>(null);
 
   return (
     <div className="w-full">
-      <div className="flex justify-between items-center py-2 px-1">
-        <div className="flex items-center gap-1">
+      <div className="flex flex-col sm:flex-row justify-between items-center py-2 gap-2">
+        <div className="flex items-center gap-1 w-full sm:w-auto justify-center sm:justify-start">
           <div className="flex rounded-lg bg-muted p-1">
             <Select
               value={
@@ -115,19 +114,19 @@ export function DataTable<TData, TValue>({
               onClick={copyToClipboard}
             >
               <Copy className="h-3 w-3 mr-1" />
-              Copiar
+              <span>Copiar</span>
             </Button>
             <Button
               variant="ghost"
               className="h-7 px-2 hover:bg-accent hover:text-accent-foreground"
-              onClick={downloadExcel}
+              onClick={() => downloadExcel(tableRef)}
             >
               <FileSpreadsheet className="h-3 w-3 mr-1" />
-              Excel
+              <span>Excel</span>
             </Button>
           </div>
         </div>
-        <div className="relative">
+        <div className="relative w-auto">
           <Input
             placeholder="Buscar..."
             value={globalFilter ?? ""}
@@ -146,18 +145,22 @@ export function DataTable<TData, TValue>({
           )}
         </div>
       </div>
-      <div className="rounded-md border overflow-hidden">
-        <Table>
+      <div className="rounded-md border overflow-x-auto">
+        <Table ref={tableRef}>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
                 key={headerGroup.id}
                 className="bg-primary/5 border-b-2 border-primary/20"
               >
-                {headerGroup.headers.map((header) => (
+                {headerGroup.headers.map((header, index) => (
                   <TableHead
                     key={header.id}
-                    className="py-1 text-left text-sm font-semibold text-foreground uppercase tracking-wider border-r last:border-r-0"
+                    className={`py-1 text-left text-sm font-semibold text-foreground uppercase tracking-wider border-r last:border-r-0 ${
+                      index === 0
+                        ? "sticky left-0 z-20 bg-primary/5 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]"
+                        : ""
+                    }`}
                   >
                     {header.isPlaceholder
                       ? null
@@ -172,18 +175,26 @@ export function DataTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row, index) => (
+              table.getRowModel().rows.map((row, rowIndex) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   className={`hover:bg-muted/50 ${
-                    index % 2 === 0 ? "bg-background" : "bg-muted/20"
+                    rowIndex % 2 === 0 ? "bg-background" : "bg-muted/20"
                   }`}
                 >
-                  {row.getVisibleCells().map((cell) => (
+                  {row.getVisibleCells().map((cell, cellIndex) => (
                     <TableCell
                       key={cell.id}
-                      className="px-2 py-1.5 whitespace-nowrap border-r last:border-r-0 border-b"
+                      className={`px-2 py-1.5 whitespace-nowrap border-r last:border-r-0 border-b ${
+                        cellIndex === 0
+                          ? `sticky left-0 z-10 ${
+                              rowIndex % 2 === 0
+                                ? "bg-background"
+                                : "bg-muted/20"
+                            } shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]`
+                          : ""
+                      }`}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -208,10 +219,14 @@ export function DataTable<TData, TValue>({
             <TableRow className="bg-primary/5 border-t border-primary/20">
               {table.getFooterGroups().map((footerGroup) => (
                 <React.Fragment key={footerGroup.id}>
-                  {footerGroup.headers.map((header) => (
+                  {footerGroup.headers.map((header, index) => (
                     <TableCell
                       key={header.id}
-                      className="px-2 py-2 font-semibold text-foreground uppercase tracking-wider border-r last:border-r-0"
+                      className={`px-2 py-2 font-semibold text-foreground uppercase tracking-wider border-r last:border-r-0 ${
+                        index === 0
+                          ? "sticky left-0 z-20 bg-primary/5 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]"
+                          : ""
+                      }`}
                     >
                       {header.isPlaceholder
                         ? null
@@ -227,8 +242,8 @@ export function DataTable<TData, TValue>({
           </TableFooter>
         </Table>
       </div>
-      <div className="flex items-center justify-between space-x-2 py-2">
-        <div className="flex-1 text-sm text-muted-foreground">
+      <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0 sm:space-x-2 py-2">
+        <div className="flex-1 text-sm text-muted-foreground text-center sm:text-left">
           Mostrando{" "}
           {table.getState().pagination.pageIndex *
             table.getState().pagination.pageSize +
