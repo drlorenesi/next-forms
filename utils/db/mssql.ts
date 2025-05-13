@@ -1,11 +1,17 @@
 import sql from "mssql";
 
+// Extend the Node.js global type to include our cached pool promise.
+declare global {
+  // eslint-disable-next-line no-var
+  var __mssqlPoolPromise: Promise<sql.ConnectionPool> | undefined;
+}
+
 // Construct the config object from environment variables, with additional options.
-const config = {
-  server: process.env.MSSQL_SERVER,
-  database: process.env.MSSQL_DATABASE,
-  user: process.env.MSSQL_USER,
-  password: process.env.MSSQL_PASSWORD,
+const config: sql.config = {
+  server: process.env.MSSQL_SERVER as string,
+  database: process.env.MSSQL_DATABASE as string,
+  user: process.env.MSSQL_USER as string,
+  password: process.env.MSSQL_PASSWORD as string,
   port: process.env.MSSQL_PORT ? parseInt(process.env.MSSQL_PORT, 10) : 1433,
   options: {
     encrypt: process.env.MSSQL_ENCRYPT === "true", // Use encryption if required (e.g., for Azure)
@@ -25,15 +31,17 @@ if (!config.server || !config.database || !config.user || !config.password) {
   );
 }
 
-// Asynchronously creates a new connection pool and awaits connection.
-async function createPool() {
+/**
+ * Asynchronously creates a new connection pool and awaits connection.
+ */
+async function createPool(): Promise<sql.ConnectionPool> {
   const pool = new sql.ConnectionPool(config);
 
   pool.on("error", (err) => {
     console.error("SQL Pool encountered an error:", err);
-    // Optionally reset the pool promise so that a new connection can be attempted.
+    // Optionally reset the pool promise so that a new connection can be attempted in development.
     if (process.env.NODE_ENV !== "production") {
-      global.__mssqlPoolPromise = null;
+      global.__mssqlPoolPromise = undefined;
     }
   });
 
@@ -51,7 +59,7 @@ async function createPool() {
 
 // Cache the pool promise to avoid multiple connections in development.
 // In production, a new pool is created per instance.
-let poolPromise;
+let poolPromise: Promise<sql.ConnectionPool>;
 if (process.env.NODE_ENV === "production") {
   poolPromise = createPool();
 } else {
@@ -64,18 +72,21 @@ if (process.env.NODE_ENV === "production") {
 /**
  * Returns a promise that resolves with a connected pool.
  */
-export async function mssqlConnect() {
+export async function mssqlConnect(): Promise<sql.ConnectionPool> {
   return await poolPromise;
 }
 
 /**
  * Executes a query with optional parameters.
  *
- * @param {string} sqlQuery - The SQL query to execute.
- * @param {object} [params={}] - An object with key/value pairs for query parameters.
- * @returns {Promise<object>} The result of the query.
+ * @param sqlQuery - The SQL query to execute.
+ * @param params - An object with key/value pairs for query parameters.
+ * @returns The result of the query.
  */
-export async function query(sqlQuery, params = {}) {
+export async function query<T = any>(
+  sqlQuery: string,
+  params: Record<string, any> = {}
+): Promise<sql.IResult<T>> {
   const pool = await poolPromise;
   try {
     const request = pool.request();
@@ -83,7 +94,7 @@ export async function query(sqlQuery, params = {}) {
       request.input(key, value);
     }
     const result = await request.query(sqlQuery);
-    return result;
+    return result as sql.IResult<T>;
   } catch (err) {
     console.error("Query failed:", err);
     throw err;

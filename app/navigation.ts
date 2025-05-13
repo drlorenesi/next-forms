@@ -35,6 +35,9 @@ export const navLinks = [
   },
   {
     label: "Formularios",
-    submenu: [{ href: "/formularios/ingreso", label: "Ingreso" }],
+    submenu: [
+      { href: "/formularios/ingreso", label: "Ingreso" },
+      { href: "/formularios/data-fetching", label: "Data Fetching" },
+    ],
   },
 ];
